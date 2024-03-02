@@ -21,28 +21,10 @@
         evil-operator-state-cursor '("blue" hollow))
   :init
   ;; Set initial states for certain modes
-  ;; (loop for (mode . state)
-  ;;       in '((inferior-emacs-lisp-mode . emacs)
-  ;;            (nrepl-mode . insert)
-  ;;            (comint-mode . normal)
-  ;;            (shell-mode . emacs)
-  ;;            (git-commit-mode . insert)
-  ;;            (term-mode . emacs)
-  ;;            (help-mode . emacs)
-  ;;            (grep-mode . emacs)
-  ;;            (bc-menu-mode . emacs)
-  ;;            (magit-branch-manager-mode . emacs)
-  ;;            (dired-mode . normal)
-  ;;            (wdired-mode . normal)
-  ;;            (treemacs-mode . emacs))
-  ;;       do (evil-set-initial-state mode state))
-  ;; Define `,,' as ESC
-  ;; (when (require 'key-chord nil 'noerror)
-  ;;   (key-chord-define evil-normal-state-map ",," 'evil-force-normal-state)
-  ;;   (key-chord-define evil-visual-state-map ",," 'evil-change-to-previous-state)
-  ;;   (key-chord-define evil-insert-state-map ",," 'evil-normal-state)
-  ;;   (key-chord-define evil-replace-state-map ",," 'evil-normal-state)))
-  )
+  ;;(evil-set-initial-state 'ibuffer-mode 'normal)
+  ;;(evil-set-initial-state 'dired-mode 'emacs)
+  ;;(evil-set-initial-state 'treemacs-mode 'emacs))
+   )
 
 ;; Evil collection
 (use-package evil-collection

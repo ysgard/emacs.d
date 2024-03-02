@@ -15,6 +15,20 @@
 ;;; Code:
 (require 'cl-lib)
 
+;; Set some constants
+
+(defconst *sys/win32*
+  (eq system-type 'windows-nt)
+  "Are we running on Wintel?")
+
+(defconst *sys/linux*
+  (eq system-type 'gnu/linux)
+  "Are we running on a GNU/Linux?")
+
+(defconst *sys/mac*
+  (eq system-type 'darwin)
+  "Are we running on MacOS?")
+
 (defmacro ys/with-system (type &rest body)
 	"Evaluate BODY if `system-type' equals TYPE."
 	(declare (indent defun))

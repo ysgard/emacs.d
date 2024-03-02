@@ -7,8 +7,8 @@
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(setq inhibit-splash-screen t)
 (setq use-file-dialog nil)
+(setq inhibit-startup-screen t)
 ;; Set default width to 100 cols
 (add-to-list 'initial-frame-alist '(width . 100))
 
@@ -79,7 +79,7 @@
   (setq-default frame-title-format "%b (%f)")
 
   ;; Map the correct keybindings for macOS
-  (when (eq system-type 'darwin)
+  (when *sys/mac*
     (setq mac-command-modifier 'super)
     (setq mac-option-modifier 'meta)
     (setq max-control-modifier 'control))
@@ -128,8 +128,6 @@
                               (call-interactively 'self-insert-command)))))))
 
 
-
-
 ;; Keybinds
 ;; We load this a bit early so other packages can take advantage
 ;; of :general in their package loads.
@@ -138,41 +136,12 @@
 (require 'ys-evil)
 ;;; Terminal configs
 (require 'ys-terminal)
-
-
-;;; Theming
-
-
-(use-package emacs ; Note we reuse the package 'emacs' here
-  :init
-  (pixel-scroll-precision-mode t)
-  (set-face-attribute 'default nil
-                      :font "Berkeley Mono"
-                      ;; If we're using retina bump up the height
-                      :height (if (eq system-type 'darwin) 130 100)))
-
-
-(use-package doom-themes
-  :demand
-  :config
-  (load-theme 'doom-challenger-deep t))
-
-;; Nicer Modeline
-(use-package doom-modeline
-  :ensure t ; install if not exist
-  :init (doom-modeline-mode 1))
-
-;; Cool icons
-(use-package nerd-icons)
-
-;; nya-nya-nya-n-nya-nya-nya-nyan
-(use-package nyan-mode
-  :init
-  (nyan-mode))
-
-
-
-
+;;; Display and Themes
+(require 'ys-display)
+;;; Dashboard
+(require 'ys-dashboard)
+;;; File navigation and sidebars
+(require 'ys-navigation)
 
 ;;; Tree-sitter
 (use-package emacs
@@ -199,41 +168,6 @@
 
 ;;; Packages
 
-;; Dired
-(require 'dired)
-;; Reuse dired buffers
-(use-package dired-single
-  :config
-  (define-key dired-mode-map (kbd "RET") 'dired-single-buffer))
-
-;; Dired project drawer
-(use-package dired-sidebar
-  :after dired-subtree
-  :commands (dired-sidebar-toggle-sidebar)
-  :init
-  (add-hook 'dired-sidebar-mode-hook
-            (lambda ()
-              (unless (file-remote-p default-directory)
-                (auto-revert-mode))))
-  :general
-  (leader-keys
-    :keymap 'dired-mode-map
-    "w o" '(other-window :which-key "other"))
-  :config
-  (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
-  (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
-  (setq dired-sidebar-subtree-line-prefix "__"
-        dired-sidebar-theme 'nerd
-        dired-sidebar-use-term-integration t
-        dired-sidebar-use-custom-font nil
-        dired-sidebar-should-follow-file nil
-        dired-sidebar-use-one-instance t))
-
-;; Have a nice sidebar for buffers too
-(use-package ibuffer-sidebar
-  :commands (ibuffer-sidebar-toggle-sidebar)
-  :config
-  (setq ibuffer-sidebar-use-custom-font nil))
 
 ;; Projects
 (use-package projectile
@@ -294,23 +228,11 @@
   :config
   (global-diff-hl-mode))
 
-;; Treemacs
-(use-package treemacs
-  :general
-  (leader-keys
-    "t" '(treemacs :which-key "treemacs")))
-(use-package treemacs-evil
-  :after (treemacs evil))
-(use-package treemacs-projectile
-  :after (treemacs projectile))
-(use-package treemacs-icons-dired
-  :hook (dired-mode . treemacs-icons-dired-enable-once))
-(use-package treemacs-magit
-  :after (treemacs magit))
 
 ;; Terraform
 (use-package terraform-mode)
 
-
+;; Start the dashboard
+(dashboard-open)
 
 ;;; init.el ends here
