@@ -138,8 +138,6 @@
 (require 'ys-terminal)
 ;;; Display and Themes
 (require 'ys-display)
-;;; Dashboard
-(require 'ys-dashboard)
 ;;; File navigation and sidebars
 (require 'ys-navigation)
 
@@ -232,7 +230,8 @@
 ;; Terraform
 (use-package terraform-mode)
 
-;; Start the dashboard
-(dashboard-open)
+;;; Dashboard
+(require 'ys-dashboard)
+(dashboard-setup-startup-hook)
 
 ;;; init.el ends here
