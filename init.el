@@ -9,8 +9,8 @@
 (scroll-bar-mode -1)
 (setq use-file-dialog nil)
 (setq inhibit-startup-screen t)
-;; Set default width to 100 cols
 (add-to-list 'initial-frame-alist '(width . 100))
+
 
 ;; Import some utility functions
 (add-to-list 'load-path "~/.emacs.d/ys")

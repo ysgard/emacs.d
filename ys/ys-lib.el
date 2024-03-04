@@ -232,5 +232,15 @@ If FOREVER is non-nil, the file is deleted without being moved to trash."
           (switch-to-buffer "*compilation*")
           (shrink-window (- h compilation-window-height)))))))
 
+;; Don't currently use it, but keeping it in the library
+(defun ys/set-initial-frame (height-factor width-factor)
+  "Set the initial frame height and width to HEIGHT-FACTOR and WIDTH-FACTOR of screen."
+  (let* ((a-width (* (display-pixel-width) width-factor))
+         (a-height (* (display-pixel-height) height-factor))
+         (a-left (truncate (/ (- (display-pixel-width) a-width) 2)))
+         (a-top (truncate (/ (- (display-pixel-height) a-height) 2))))
+    (set-frame-position (selected-frame) a-left a-top)
+    (set-frame-size (selected-frame) (truncate a-width) (truncate a-height) t)))
+
 (provide 'ys-lib)
 ;;; ys-lib.el ends here

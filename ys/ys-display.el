@@ -7,13 +7,16 @@
 ;;;
 ;;; Code:
 
+
 (use-package emacs ; Note we reuse the package 'emacs' here
   :init
   ;(pixel-scroll-precision-mode t) ; good-scroll should be better
   (set-face-attribute 'default nil
                       :font "Berkeley Mono"
                       ;; If we're using retina bump up the height
-                      :height (if (eq system-type 'darwin) 130 100)))
+                      :height (if *sys/mac* 130 100))
+  (set-frame-size (selected-frame) 100 80 nil)
+  (set-frame-parameter (selected-frame) 'top 0))
 
 
 (use-package doom-themes
