@@ -138,8 +138,6 @@
 (require 'ys-terminal)
 ;;; Display and Themes
 (require 'ys-display)
-;;; Dashboard
-(require 'ys-dashboard)
 ;;; File navigation and sidebars
 (require 'ys-navigation)
 
@@ -241,7 +239,8 @@
 (use-package esup
   :ensure t)
 
-;; Start the dashboard
-(dashboard-open)
+;;; Dashboard
+(require 'ys-dashboard)
+(dashboard-setup-startup-hook)
 
 ;;; init.el ends here
