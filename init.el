@@ -190,10 +190,15 @@
   (projectile-mode +1))
 
 ;; Make sure our path matches the system's
-(use-package exec-path-from-shell
-  :init
+;; We defer initialization until after init
+;; As most of our use-package use defer.
+(defun ys/exec-path-from-shell-init ()
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
+
+(use-package exec-path-from-shell
+  :init
+  (add-hook 'after-init-hook 'ys/exec-path-from-shell-init))
 
 ;; Fuzzy finding
 ;; Ido everywhere!
@@ -231,6 +236,10 @@
 
 ;; Terraform
 (use-package terraform-mode)
+
+;; Profiler for startup times
+(use-package esup
+  :ensure t)
 
 ;; Start the dashboard
 (dashboard-open)
