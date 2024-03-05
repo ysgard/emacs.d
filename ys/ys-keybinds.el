@@ -81,6 +81,7 @@
    "f r" '(rename-visited-file :which-key "rename")
    "f d" '(ys/delete-this-file :which-key "delete")
    "f q" '(save-buffers-kill-emacs :which-key "quit")
+   "f o" '(ido-find-file-other-window :which-key "open in other")
 
    ;; Magit
    "g" '(:ignore t :which-key "git")
