@@ -8,6 +8,23 @@
 ;;; Code:
 
 ;; Provide hints as to available keys
+
+(use-package emacs
+  :init
+  ;; Don't use ESC as a modifier
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+  ;; Map the correct keybindings for macOS
+  (when *sys/mac*
+    (setq mac-command-modifier 'super
+          mac-option-modifier 'meta
+          max-control-modifier 'control))
+
+  ;; Make sure we turn off evil keybinding before we start evil,
+  ;; As we use general instead
+  (setq evil-want-keybinding nil))
+
+
 (use-package which-key
   :demand
   :init

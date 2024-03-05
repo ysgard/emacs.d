@@ -10,14 +10,33 @@
 
 (use-package emacs ; Note we reuse the package 'emacs' here
   :init
-  ;(pixel-scroll-precision-mode t) ; good-scroll should be better
+  ;; Initial UI configuration
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (setq use-file-dialog nil
+        inhibit-startup-screen t
+        initial-scratch-message nil)
+  (defun display-startup-echo-area-message () ; get rid of default text in minibuffer
+    (message ""))
+  (pixel-scroll-precision-mode t)
+  ;; Show filename in frame
+  (setq-default frame-title-format "%b (%f)")
+
+  ;; Font
   (set-face-attribute 'default nil
                       :font "Berkeley Mono"
                       ;; If we're using retina bump up the height
                       :height (if *sys/mac* 130 100))
-  (set-frame-size (selected-frame) 100 80 nil)
-  (set-frame-parameter (selected-frame) 'top 0))
 
+  ;; Set the Size of the frame
+  (set-frame-size (selected-frame) 100 45 nil)
+  (set-frame-parameter (selected-frame) 'top 0)
+
+  ;; Configure the built-in window dividers
+  (setq window-divider-default-places t
+        window-divider-default-bottom-width 1
+        window-divider-default-right-width 1)
+  (window-divider-mode))
 
 (use-package doom-themes
   :demand
@@ -36,27 +55,6 @@
 (use-package nyan-mode
   :init
   (nyan-mode))
-
-;; Window Dividers
-(use-package emacs
-  :config
-  (setq window-divider-default-places t
-        window-divider-default-bottom-width 1
-        window-divider-default-right-width 1)
-  :init
-  (window-divider-mode))
-
-
-;; (use-package good-scoll
-;;   :commands good-scroll-mode
-;;   :custom
-;;   (good-scroll-duration 0.2)
-;;   (good-scroll-point-jump 4)
-;;   :init
-;;   ;; Bind page-up and page-down to good-scroll
-;;   (global-set-key [next] #'good-scroll-up-full-screen)
-;;   (global-set-key [prior] #'good-scroll-down-full-screen))
-
 
 (provide 'ys-display)
 

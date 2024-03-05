@@ -3,15 +3,6 @@
 ;;; Commentary: Entry point for our Emacs config
 ;;; Code:
 
-;;; UI
-
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(setq use-file-dialog nil)
-(setq inhibit-startup-screen t)
-(add-to-list 'initial-frame-alist '(width . 100))
-
-
 ;; Import some utility functions
 (add-to-list 'load-path "~/.emacs.d/ys")
 (require 'ys-lib)
@@ -28,83 +19,14 @@
 
 
 ;;; Base
+(require 'ys-base)
 
+;;; Editing
+(require 'ys-editor)
 
 ;; Set sane defaults
 (use-package emacs ; Wrap emacs-specific settings in a use-package block
   :init
-  ;; Some basic info
-  (setq user-full-name "Jan Van Uytven")
-  (setq user-mail-address "ysgard@ysgard.net")
-
-  (setq initial-scratch-message nil)
-  (defun display-startup-echo-area-message () ; get rid of default text in minibuffer
-    (message ""))
-  (defalias 'yes-or-no-p 'y-or-n-p) ; Prefer y/n to yes/no
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit) ; Don't use ESC as a modifier
-
-  ;; UTF-8 everywhere
-  (set-charset-priority 'unicode)
-  (setq locale-coding-system 'utf-8
-	coding-system-for-read 'utf-8
-	coding-system-for-write 'utf-8)
-  (set-terminal-coding-system 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
-  (set-selection-coding-system 'utf-8)
-  (prefer-coding-system 'utf-8)
-  (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
-
-  ;; Deal with backup and temporary files
-  (setq make-backup-files nil
-        backup-directory-alist `((".*" . ,temporary-file-directory))
-        auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
-
-  ;; Make sure buffers match file contents when file changes
-  (global-auto-revert-mode t)
-  (setq global-auto-revert-non-file-buffers t
-        auto-revert-verbose nil)
-
-  ;; Use spaces, but configure tab-width for modes that use tabs
-  (setq-default indent-tabs-mode nil)
-  (setq-default tab-width 2)
-  (define-key global-map (kbd "RET") 'newline-and-indent)
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  (setq require-final-newline t) ; Always append newline before EOF
-  ;; The unwashed masses have spoken - no double spaces
-  (setq sentence-end-double-space nil)
-  (delete-selection-mode t) ; typed text replaces selection
-  (transient-mark-mode t) ; highlight marked regions
-
-  ;; Show filename in frame
-  (setq-default frame-title-format "%b (%f)")
-
-  ;; Map the correct keybindings for macOS
-  (when *sys/mac*
-    (setq mac-command-modifier 'super)
-    (setq mac-option-modifier 'meta)
-    (setq max-control-modifier 'control))
-
-  ;; Make sure we turn off evil keybinding before we start evil,
-  ;; As we use general instead
-  (setq evil-want-keybinding nil)
-
-  ;; Turn on columns and highlight current line
-  (setq column-number-mode t)
-  (global-display-line-numbers-mode t)
-
-  ;; Miscellanea
-  (setq x-underline-at-descent-line t
-        use-dialog-box nil
-        ring-bell-function 'ys/flash-mode-line)
-  (show-paren-mode t)
-
-  ;; Only display the warning buffer if we encounter an error
-  (setq warning-minimum-level :error)
-
-  ;; Unset SSH_AUTH_SOCK on MacOS to fix built-in git fetches
-  ;; https://emacs.stackexchange.com/questions/30874/magit-how-to-use-ssh-key-rather-than-being-prompted-for-password
-  (if (eq system-type 'darwin) (setenv "SSH_AUTH_SOCK" nil))
-
   ;; We use ido for fuzzy finding
   (setq ido-enable-flex-matching t ; Match characters if we can't match substring
         ido-enable-prefix nil      ; Finds matches that aren't prefixes
