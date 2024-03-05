@@ -2,10 +2,15 @@
 ;;;
 ;;; Commentary:
 ;;;
-;;; Configuration of base features of Emacs.
+;;; Configuration of base features of Emacs, and system-level config.
 ;;;
 ;;; Code:
 
+;;; Garbage collection
+(use-package gcmh
+  :demand
+  :config
+  (gcmh-mode 1))
 
 (use-package emacs
   :init
@@ -47,6 +52,20 @@
   ;; https://emacs.stackexchange.com/questions/30874/magit-how-to-use-ssh-key-rather-than-being-prompted-for-password
   (when *sys/mac* (setenv "SSH_AUTH_SOCK" nil)))
 
+;; Make sure our path matches the system's
+;; We defer initialization until after init
+;; As most of our use-package use defer.
+(defun ys/exec-path-from-shell-init ()
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
+
+(use-package exec-path-from-shell
+  :init
+  (add-hook 'after-init-hook 'ys/exec-path-from-shell-init))
+
+;; Profiler for startup times
+(use-package esup
+  :ensure t)
 
 (provide 'ys-base)
 
