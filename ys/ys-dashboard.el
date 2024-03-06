@@ -9,6 +9,7 @@
   :ensure t
   :demand t ; We want this loaded immediately, not lazy-loaded
   :custom
+  (dashboard-startup-banner (expand-file-name "images/sun.png" *ys/asset-dir*))
   (dashboard-center-content t)
   (dashboard-items '((projects . 5)
                      (recents . 5)))

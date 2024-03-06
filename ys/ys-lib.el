@@ -29,6 +29,8 @@
   (eq system-type 'darwin)
   "Are we running on MacOS?")
 
+(defconst *ys/asset-dir* (locate-user-emacs-file "assets/"))
+
 (defmacro ys/with-system (type &rest body)
 	"Evaluate BODY if `system-type' equals TYPE."
 	(declare (indent defun))
