@@ -39,6 +39,9 @@
 ;; LSP and friends
 (require 'ys-lsp)
 
+;; Web dev
+(require 'ys-js)
+
 ;; Everything else
 (require 'ys-misc)
 
