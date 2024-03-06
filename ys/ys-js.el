@@ -21,7 +21,6 @@
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 
-
 (provide 'ys-js)
 
 ;;; ys-js.el ends here
