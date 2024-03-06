@@ -44,6 +44,5 @@
 
 ;;; Dashboard
 (require 'ys-dashboard)
-(dashboard-setup-startup-hook)
 
 ;;; init.el ends here

@@ -7,6 +7,7 @@
 ;;; Code:
 (use-package dashboard
   :ensure t
+  :demand t ; We want this loaded immediately, not lazy-loaded
   :custom
   (dashboard-center-content t)
   (dashboard-items '((projects . 5)
