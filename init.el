@@ -45,6 +45,9 @@
 ;; Everything else
 (require 'ys-misc)
 
+;; Completion framework(s)
+(require 'ys-completion)
+
 ;;; Dashboard
 (require 'ys-dashboard)
 

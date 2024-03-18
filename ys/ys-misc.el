@@ -21,6 +21,10 @@
 ;; Terraform
 (use-package terraform-mode)
 
+;; posframe for pop-up frames (used by a couple other packages)
+(use-package posframe)
+
+
 (provide 'ys-misc)
 
 ;;; ys-misc.el ends here

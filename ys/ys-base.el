@@ -61,6 +61,7 @@
 
 (use-package exec-path-from-shell
   :init
+  (setq exec-path-from-shell-arguments nil)
   (add-hook 'after-init-hook 'ys/exec-path-from-shell-init))
 
 ;; Profiler for startup times

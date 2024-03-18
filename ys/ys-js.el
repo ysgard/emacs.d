@@ -21,6 +21,16 @@
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 
+(use-package js2-mode
+  :init
+  (setq js-indent-level 2)
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+
+(use-package json-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode)))
+
 (provide 'ys-js)
 
 ;;; ys-js.el ends here
