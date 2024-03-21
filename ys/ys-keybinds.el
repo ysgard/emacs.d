@@ -105,11 +105,11 @@
    "q r" '(query-replace-regexp :which-key "find and replace")
 
    ;; Shells and executions
-   "s" '(:ignore t :which-key "shells")
-   "s <escape>" '(keyboard-escape-quit :which-key t)
-   "s `" '(ys/eshell-here :which-key "eshell")
-   "s x" '(ys/eshell-x :which-key "exit eshell")
-   "s t" '(shell-pop :which-key "pop a shell")
+   "x" '(:ignore t :which-key "shells")
+   "x <escape>" '(keyboard-escape-quit :which-key t)
+   "x `" '(ys/eshell-here :which-key "eshell")
+   "x x" '(ys/eshell-x :which-key "exit eshell")
+   "x t" '(shell-pop :which-key "pop a shell")
 
    ;; windows
    "w" '(:ignore t :which-key "windows")

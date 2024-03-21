@@ -41,7 +41,7 @@
   :config (smex-initialize)
   :general
   (leader-keys
-    "x" '(smex :which-key "execute")))
+    "X" '(smex :which-key "execute")))
 
 (use-package ido-vertical-mode :config (ido-vertical-mode))
 
