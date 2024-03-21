@@ -27,9 +27,8 @@
 (setq straight-use-package-by-default t)
 (setq use-package-always-defer t) ; lazy-load by default
 
-
-
-
+;; Diminish is used to hide minor modes
+(use-package diminish)
 
 (provide 'ys-package)
 
