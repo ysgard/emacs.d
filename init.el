@@ -48,6 +48,9 @@
 ;; Completion framework(s)
 (require 'ys-completion)
 
+;; Org-mode
+(require 'ys-org)
+
 ;;; Dashboard
 (require 'ys-dashboard)
 
