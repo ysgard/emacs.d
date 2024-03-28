@@ -94,6 +94,9 @@
   (leader-keys
     "t" '(treemacs :which-key "treemacs")))
 (use-package treemacs-evil
+  :bind (:map evil-treemacs-state-map
+              ("?" . treemacs-helpful-hydra)
+              ("M-?" . treemacs-helpful-hydra))
   :after (treemacs evil))
 (use-package treemacs-projectile
   :after (treemacs projectile))

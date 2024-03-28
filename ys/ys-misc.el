@@ -19,7 +19,14 @@
   (global-diff-hl-mode))
 
 ;; Terraform
-(use-package terraform-mode)
+(use-package terraform-mode
+  :custom (terraform-indent-level 2)
+  :config
+  (defun my-terraform-mode-init ()
+    (outline-minor-mode 1)
+    (setq terraform-format-on-save t))
+  :hook (terraform-mode-hook . my-terraform-mode-init))
+
 
 ;; posframe for pop-up frames (used by a couple other packages)
 (use-package posframe)
