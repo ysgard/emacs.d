@@ -22,10 +22,6 @@
             (lambda ()
               (unless (file-remote-p default-directory)
                 (auto-revert-mode))))
-  :general
-  (leader-keys
-    :keymap 'dired-mode-map
-    "w o" '(other-window :which-key "other"))
   :config
   (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
   (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
@@ -43,10 +39,7 @@
   (setq ibuffer-sidebar-use-custom-font nil))
 
 ;; Treemacs
-(use-package treemacs
-  :general
-  (leader-keys
-    "t" '(treemacs :which-key "treemacs")))
+(use-package treemacs)
 (use-package treemacs-evil
   :bind (:map evil-treemacs-state-map
               ("?" . treemacs-helpful-hydra)
