@@ -5,14 +5,14 @@
 ;;; Keybinds are all put in one place here, because otherwise I
 ;;; forget where I set them. Easier to organize too.
 ;;;
-;;; Code:
+;;; Code: This, is code
 
 ;; Provide hints as to available keys
 
 (use-package emacs
   :init
   ;; Don't use ESC as a modifier
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  (global-set-key (kbd "ESC") 'keyboard-escape-quit)
 
   ;; Map the correct keybindings for macOS
   (when *sys/mac*
@@ -39,10 +39,10 @@
   (general-evil-setup)
   ;; Define space as our leader key
   (general-create-definer leader-keys
-                          :states '(normal insert visual emacs)
+                          :states '(normal visual insert emacs)
                           :keymaps 'override
-                          :prefix "SPC"
-                          :global-prefix "C-SPC")
+                          :prefix ","
+                          :global-prefix ",,")
 
   (leader-keys
 
@@ -56,7 +56,6 @@
    "b n" '(ys/next-user-buffer :which-key "next")
    "b p" '(ys/previous-user-buffer :which-key "previous")
    "b k" '(kill-current-buffer :which-key "kill")
-   "b b" '(ido-switch-buffer :which-key "list")
    "b s" '(ibuffer-sidebar-toggle-sidebar :which-key "sidebar")
 
     ;; Config
@@ -75,13 +74,12 @@
    ;; File
    "f" '(:ignore t :which-key "file")
    "f <escape>" '(keyboard-escape-quit :which-key t)
+   "f f" '(find-file :which-key "find")
    "f n" '(ys/new-empty-buffer :which-key "new")
-   "f f" '(ido-find-file :which-key "open")
    "f s" '(save-buffer :which-key "save")
    "f r" '(rename-visited-file :which-key "rename")
    "f d" '(ys/delete-this-file :which-key "delete")
    "f q" '(save-buffers-kill-emacs :which-key "quit")
-   "f o" '(ido-find-file-other-window :which-key "open in other")
 
    ;; Magit
    "g" '(:ignore t :which-key "git")
@@ -99,6 +97,8 @@
    "m /" '(ys/toggle-comment :which-key "comment/uncomment")
    "m e" '(ys/replace-last-sexp :which-key "evaluate sexp")
 
+   "o" '(other-window :which-key "other")
+
    ;; search, replace
    "q" '(:ignore t :which-key "query")
    "q <escape>" '(keyboard-escape-quit :which-key t)
@@ -107,7 +107,7 @@
    ;; Shells and executions
    "x" '(:ignore t :which-key "shells")
    "x <escape>" '(keyboard-escape-quit :which-key t)
-   "x `" '(ys/eshell-here :which-key "eshell")
+   " `" '(ys/eshell-here :which-key "eshell")
    "x x" '(ys/eshell-x :which-key "exit eshell")
    "x t" '(shell-pop :which-key "pop a shell")
 

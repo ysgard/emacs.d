@@ -6,52 +6,6 @@
 ;;;
 ;;; Code:
 
-;; Ido config
-(use-package emacs
-  :init
-  ;; We use ido for fuzzy finding
-  (setq ido-enable-flex-matching t ; Match characters if we can't match substring
-        ido-enable-prefix nil      ; Finds matches that aren't prefixes
-        ido-use-filename-at-point 'guess
-        ido-use-url-at-point t
-        ido-max-prospects 10
-        ido-create-new-buffer 'always
-        ido-use-virtual-buffers t)
-  ;; Show more commonly used file extensions first
-  (setq ido-file-extensions-order '(".tf" ".rb" ".md" ".txt"))
-  (ido-mode t)
-  ;; Add a hook to `~' sends us to homedir with ido-find-file
-  (add-hook 'ido-setup-hook
-            (lambda ()
-              (define-key ido-file-completion-map
-                          (kbd "~")
-                          (lambda ()
-                            (interactive)
-                            (if (looking-back "/")
-                                (insert "~/")
-                              (call-interactively 'self-insert-command)))))))
-
-;; Fuzzy finding
-;; Ido everywhere!
-(use-package ido-completing-read+
-  :config (ido-ubiquitous-mode t))
-
-;; Smex provides an ido-like interface to M-x
-(use-package smex
-  :config (smex-initialize)
-  :general
-  (leader-keys
-    "X" '(smex :which-key "execute")))
-
-(use-package ido-vertical-mode :config (ido-vertical-mode))
-
-(use-package flx-ido
-  :config
-  (flx-ido-mode t)
-  (setq ido-enable-flex-matching t
-        ido-use-faces nil
-        gc-cons-threshold 20000000))
-
 ;; Dired
 (require 'dired)
 ;; Reuse dired buffers
